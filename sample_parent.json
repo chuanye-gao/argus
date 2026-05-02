@@ -1,0 +1,18 @@
+{
+  "parent_id": "parent_000123",
+  "source_doc": "robot_manual.pdf",
+  "children": [
+    {
+      "child_id": "child_000123_01",
+      "text": "机器人启动前需要检查电源连接是否正常。"
+    },
+    {
+      "child_id": "child_000123_02",
+      "text": "如果控制器无法连接，首先检查网络配置。"
+    },
+    {
+      "child_id": "child_000123_03",
+      "text": "设备运行期间出现温度告警时，需要查看传感器日志。"
+    }
+  ]
+}
