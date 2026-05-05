@@ -1,8 +1,17 @@
 [project]
 name = "argus"
-version = "0.1.0"
-description = "Synthetic retrieval dataset generator for parent/child RAG chunks."
+version = "0.2.0"
+description = "PDF-oriented RAG chunking benchmark and retrieval dataset tools."
 requires-python = ">=3.10"
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+llm = ["openai>=1.0"]
+pdf = ["pymupdf>=1.24"]
+all = ["fastapi>=0.110", "uvicorn[standard]>=0.29", "openai>=1.0", "pymupdf>=1.24"]
 
 [project.scripts]
 argus = "argus.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["argus*"]

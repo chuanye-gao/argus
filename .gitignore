@@ -1,20 +1,63 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.python_history
 
+# Virtual environments
 .venv/
 venv/
 env/
+ENV/
 
+# Test and tool caches
 .pytest_cache/
+.tmp/
+.cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.pyre/
+.dmypy.json
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
 
+# Build artifacts
 build/
 dist/
 *.egg-info/
+pip-wheel-metadata/
+*.egg
+*.whl
+MANIFEST
 
+# Local environment files
 .env
 .env.*
+!.env.example
+!.env.sample
 
+# Project-local private prompt material
 PROJECT_PROMPT.md
+IMPLEMENTATION_PLAN.md
+
+task1.md
+task.md
+
+# Generated sample outputs
+samples/outputs/
+
+# Logs and local databases
+*.log
+*.sqlite
+*.sqlite3
+*.db
+
+# Editor and OS noise
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

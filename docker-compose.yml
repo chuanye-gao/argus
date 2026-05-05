@@ -1,0 +1,11 @@
+services:
+  argus:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./samples:/data
+    environment:
+      - ARGUS_LLM_API_KEY=${ARGUS_LLM_API_KEY:-}
+      - ARGUS_LLM_BASE_URL=${ARGUS_LLM_BASE_URL:-}
+      - ARGUS_LLM_MODEL=${ARGUS_LLM_MODEL:-gpt-4o-mini}

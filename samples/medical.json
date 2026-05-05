@@ -1,0 +1,22 @@
+{
+  "parent_id": "parent_ct_001",
+  "source_doc": "ct_scanner_maintenance_guide.pdf",
+  "children": [
+    {
+      "child_id": "child_ct_001_01",
+      "text": "CT 扫描仪每日开机前需执行球管预热程序，预热时间不少于 15 分钟，以避免冷启动对球管寿命的损耗。"
+    },
+    {
+      "child_id": "child_ct_001_02",
+      "text": "图像出现环状伪影时，通常是探测器某通道增益漂移所致，需执行空气校准（Air Calibration）程序重新采集基线数据。"
+    },
+    {
+      "child_id": "child_ct_001_03",
+      "text": "机架旋转噪音异常增大时，应立即停止扫描并检查滑环接触面和旋转轴承，不可带故障继续使用。"
+    },
+    {
+      "child_id": "child_ct_001_04",
+      "text": "每季度必须对高压发生器输出电压进行测量标定，允许误差范围为 ±2%，超出后需联系厂家工程师调整。"
+    }
+  ]
+}

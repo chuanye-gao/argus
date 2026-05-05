@@ -1,26 +1,24 @@
 # Argus
 
-Language: [简体中文](README.zh-CN.md)
+语言：[English](README.md)
 
-Argus is a PDF-oriented RAG chunking benchmark. Given one PDF, it parses text,
-tries multiple chunking strategies, generates a strategy-independent retrieval
-evaluation set, maps source evidence spans to strategy-specific gold chunks,
-evaluates retrieval quality, and recommends a chunking configuration.
+Argus 是一个面向 PDF 的 RAG 分块基准工具。给定一个 PDF，它会解析文本、
+尝试多种分块策略、生成与策略无关的检索评估集、把源文本证据范围映射到
+各策略下的 gold chunks，评估检索质量，并推荐一个分块配置。
 
-It is not a chatbot and not a GraphRAG replacement. It focuses on the step before
-indexing:
+它不是聊天机器人，也不是 GraphRAG 的替代品。它关注索引前的这一步：
 
 ```text
 PDF -> parse text -> chunk several ways -> generate evidence-span queries
     -> map spans to chunks -> retrieve -> score -> recommend
 ```
 
-The older parent/child synthetic query generator is still available through the
-default JSON CLI and `/generate` API.
+旧版 parent/child synthetic query generator 仍然可以通过默认 JSON CLI 和
+`/generate` API 使用。
 
-## Install
+## 安装
 
-Use a repo-local virtual environment during development:
+开发时建议使用仓库内的本地虚拟环境：
 
 ```powershell
 python -m venv .venv
@@ -32,7 +30,7 @@ python -m pip install --upgrade pip
 pip install -e ".[all]"
 ```
 
-For PDF benchmark mode, PyMuPDF is required:
+如果只需要 PDF benchmark 模式，需要安装 PyMuPDF：
 
 ```bash
 pip install -e ".[pdf]"
@@ -44,26 +42,26 @@ pip install -e ".[pdf]"
 python -m argus your-file.pdf --benchmark-pdf --pretty -o report.json
 ```
 
-Useful options:
+常用参数：
 
 ```bash
 python -m argus your-file.pdf --benchmark-pdf --max-samples 12 --top-k 5 --pretty
 ```
 
-Example local smoke test:
+本地 smoke test 示例：
 
 ```powershell
 python -m argus samples\pdf\argus_incident_runbook.pdf --benchmark-pdf --max-samples 12 --top-k 5 --pretty -o samples\outputs\argus_incident_runbook_benchmark_report.json
 ```
 
-For demos and tests without a PDF parser, run the same benchmark pipeline on a
-UTF-8 text file:
+如果想在没有 PDF parser 的情况下演示或测试，可以对 UTF-8 文本文件运行同一套
+benchmark pipeline：
 
 ```bash
 python -m argus task.md --benchmark-text --pretty
 ```
 
-## Output Shape
+## 输出结构
 
 ```json
 {
@@ -104,9 +102,9 @@ python -m argus task.md --benchmark-text --pretty
 }
 ```
 
-## Reading a Report
+## 阅读报告
 
-Start with:
+建议先看这些字段：
 
 - `recommended_strategy`
 - `summary.reason`
@@ -120,47 +118,46 @@ Start with:
 - `failure_analysis`
 - `evaluation_samples`
 
-For the included smoke-test PDF, the current MVP evaluates 11 strategies and
-recommends `paragraph_1200` because it gets perfect Recall@5, MRR@5, and NDCG@5
-on the generated evidence samples while keeping the chunk count low.
+对于仓库里的 smoke-test PDF，当前 MVP 会评估 11 个策略，并推荐
+`paragraph_1200`。原因是它在生成的 evidence samples 上取得了完整的
+Recall@5、MRR@5 和 NDCG@5，同时保持了较低的 chunk 数量。
 
-## Implemented MVP
+## 已实现的 MVP
 
-- PDF parsing with page numbers and document-level character offsets.
-- Fixed-size character chunking for 500, 800, and 1200 character windows with
-  50, 100, and 200 character overlaps.
-- Recursive character chunking with paragraph and sentence boundaries.
-- Paragraph-based chunking.
-- Strategy-independent evaluation samples with source evidence spans.
-- Evidence-to-chunk mapping with a 50% overlap rule and largest-overlap fallback.
-- Dependency-free lexical retrieval index.
-- Recall@1, Recall@3, Recall@5, MRR@5, NDCG@5, chunk count, average chunk length,
-  estimated token cost, retrieved context length, and latency diagnostics.
-- Recommendation report with best overall strategy, group winners, and failed
-  query examples.
+- PDF 解析，保留页码和文档级字符 offset。
+- 固定字符数分块：500、800、1200 字符窗口，搭配 50、100、200 字符 overlap。
+- 基于段落和句子边界的 recursive character chunking。
+- 基于段落的 chunking。
+- 与策略无关的 evaluation samples，包含源文本 evidence spans。
+- evidence-to-chunk 映射，使用 50% overlap 规则和最大 overlap fallback。
+- 无额外依赖的 lexical retrieval index。
+- Recall@1、Recall@3、Recall@5、MRR@5、NDCG@5、chunk count、
+  average chunk length、estimated token cost、retrieved context length、
+  latency diagnostics。
+- 推荐报告，包含整体最佳策略、分组最佳策略和失败查询示例。
 
-## Existing JSON Generator
+## 现有 JSON Generator
 
-The original parent/child generator remains the default CLI behavior:
+原有 parent/child generator 仍然是默认 CLI 行为：
 
 ```bash
 python -m argus samples/robotics.json --pretty
 python -m argus --batch samples/batch_input.jsonl --pretty -o output.json
 ```
 
-The HTTP API can still be started with:
+HTTP API 仍然可以这样启动：
 
 ```bash
 python -m argus --serve
 ```
 
-Endpoints:
+接口：
 
 - `GET /health`
 - `POST /generate`
 - `POST /batch`
 
-## Development
+## 开发
 
 ```bash
 python -m pytest tests/ -v

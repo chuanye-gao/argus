@@ -1,0 +1,22 @@
+{
+  "parent_id": "parent_net_001",
+  "source_doc": "network_troubleshooting_kb.pdf",
+  "children": [
+    {
+      "child_id": "child_net_001_01",
+      "text": "终端无法访问内网资源时，首先用 ping 命令测试默认网关可达性；如网关不通，检查本机 IP 配置是否与 DHCP 分配一致。"
+    },
+    {
+      "child_id": "child_net_001_02",
+      "text": "交换机端口频繁 down/up 闪烁（抖动）通常由网线接触不良或对端网卡协商失败引起，更换网线后仍异常则检查端口速率强制配置。"
+    },
+    {
+      "child_id": "child_net_001_03",
+      "text": "DNS 解析失败但 IP 直连正常时，需检查 /etc/resolv.conf 中的 DNS 服务器地址是否可达，以及是否有防火墙规则拦截了 UDP 53 端口。"
+    },
+    {
+      "child_id": "child_net_001_04",
+      "text": "SSL 证书过期会导致 HTTPS 访问报“证书不受信任”错误，需在到期前 30 天向 CA 申请续签，并同步更新负载均衡器上的证书配置。"
+    }
+  ]
+}
